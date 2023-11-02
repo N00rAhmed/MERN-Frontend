@@ -13,7 +13,7 @@ const TaskForm = () => {
 
         const task = {title, description}
 
-        const response = await fetch('/api/tasks', {
+        const response = await fetch('https://apicrud-n1uz.onrender.com/api/tasks', {
             method: 'POST',
             body: JSON.stringify(task),
             headers: {

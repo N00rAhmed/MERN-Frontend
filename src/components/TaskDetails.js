@@ -3,7 +3,7 @@ import { useTasksContext } from "../hooks/useTasksContext";
 const TaskDetails = ({task}) => {
     const { dispatch } = useTasksContext()
     const handleClick = async () => {
-        const response = await fetch('/api/tasks/' + task._id, {
+        const response = await fetch('https://apicrud-n1uz.onrender.com/api/tasks/' + task._id, {
             method: 'DELETE'
         })
         const json = await response.json()
