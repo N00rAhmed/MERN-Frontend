@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import TaskDetails from '../components/TaskDetails';
 import TaskForm from '../components/TaskForm';
 import { useTasksContext } from "../hooks/useTasksContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Home = () => {
     const { tasks, dispatch } = useTasksContext();
-    const [isLoading, setIsLoading] = useState(true); // Initialize loading state
+    const { user } = useAuthContext();
 
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await fetch('https://apicrud-n1uz.onrender.com/api/tasks');
+                const response = await fetch('https://apicrud-n1uz.onrender.com/api/tasks', {
+                    headers: {
+                        'Authorization': `Bearer ${user.token}`
+                    }
+                });
                 const json = await response.json();
 
                 if (response.ok) {
@@ -18,23 +23,19 @@ const Home = () => {
                 }
             } catch (error) {
                 console.error("Error fetching tasks:", error);
-            } finally {
-                setIsLoading(false); // Set loading to false whether successful or not
             }
         };
-        fetchTasks();
-    }, [dispatch]);
+        if (user) {
+            fetchTasks();
+        }
+    }, [dispatch, user]);
 
     return (
         <div className="home">
             <div className="tasks">
-                {isLoading ? ( // Conditional rendering based on isLoading state while fetching
-                    <p>Loading...</p>
-                ) : (
-                    tasks && tasks.map((task) => (
-                        <TaskDetails key={task._id} task={task} />
-                    ))
-                )}
+                {tasks && tasks.map((task) => (
+                    <TaskDetails key={task._id} task={task} />
+                ))}
             </div>
             <TaskForm />
         </div>
