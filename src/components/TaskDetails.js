@@ -1,5 +1,6 @@
 import { useTasksContext } from "../hooks/useTasksContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { BsTrash } from 'react-icons/bs';
 
 const TaskDetails = ({task}) => {
 
@@ -29,7 +30,7 @@ const TaskDetails = ({task}) => {
             <h4>{task.title}</h4>
             <p><strong>description: </strong>{task.description}</p>
             <p>{task.createdAt}</p>
-            <span onClick={handleClick}>delete</span>
+            <span onClick={handleClick}><BsTrash style={{ display:"flex", justifyContent:"center", fontSize: 25}}/></span>
         </div>
 
     )
