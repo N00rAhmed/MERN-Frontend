@@ -1,5 +1,5 @@
 <h2>Introduction</h2>
-This application allows the user to register/login to their accounts and create tasks as well as deleting tasks. The users email address is also displayed in the top right corner.
+This application allows the user to register/login to their accounts and create tasks as well as delete tasks. The users email address is also displayed in the top right corner.
 
 ### Tech Stack
 #### Client Side: React.js, Material UI, CSS
